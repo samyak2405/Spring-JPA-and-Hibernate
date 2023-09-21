@@ -9,7 +9,7 @@ In application.properties file add following code
     spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
     spring.jpa.hibernate.ddl-auto=none
     spring.jpa.show-sql=true
-    spring.jpa.properties.hibernate.format-sql=true
+spring.jpa.properties.hibernate.format-sql=true
 spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
 In spring.jpa.hibernate.auto-ddl we can give following options
