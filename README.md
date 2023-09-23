@@ -67,6 +67,6 @@ Eg: public List<Product> findByNameAndDescription(String name,String description
 5. GreaterThan and LessThan
     - Eg: findByPriceGreaterThan(BigDecimal price), findByPriceLessThan(BigDecimal price)
 
-## JPQL and Native SQL Queries using @Query annotation
+
 
         
