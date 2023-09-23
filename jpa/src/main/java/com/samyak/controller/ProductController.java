@@ -33,6 +33,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
     @GetMapping("/get-all")
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAllProducts();
@@ -112,6 +113,56 @@ public class ProductController {
         List<Product> products = productService.getProductByNameIn(names);
         return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
     }
+
+    @GetMapping("/get-by-price/{price}")
+    public ResponseEntity<List<Product>> findByPrice(@PathVariable("price")BigDecimal price){
+        List<Product> products = productService.findByPrice(price);
+        return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
+    }
+
+    @GetMapping("/get-by-image-url/{imageUrl}")
+    public ResponseEntity<List<Product>> findByImageUrl(@PathVariable("imageUrl")String imageUrl){
+        List<Product> products = productService.findByImageUrl(imageUrl);
+        return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
+    }
+
+    @GetMapping("/get-by-sku/{sku}")
+    public ResponseEntity<Product> findBySku(@PathVariable("sku")String sku){
+        Product product = productService.findBySku(sku);
+        return new ResponseEntity<Product>(product,HttpStatus.OK);
+    }
+
+    @GetMapping("/get-by-sku-or-description/{sku}/{description}")
+    public ResponseEntity<List<Product>> findBySkuOrDescription(@PathVariable("sku")String sku,@PathVariable("description")String description){
+        List<Product> products = productService.findBySkuOrDescription(sku,description);
+        return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
+    }
+
+    @GetMapping("/get-product-by-name-description-jpql-index-param/{name}/{description}")
+    public ResponseEntity<Product> findProductNameAndDescriptionJPQLIndexParam(@PathVariable("name")String name,@PathVariable("description") String description){
+        Product product = productService.findProductNameAndDescriptionJQLIndexParam(name,description);
+        return new ResponseEntity<Product>(product,HttpStatus.OK);
+    }
+
+    @GetMapping("/get-product-by-name-description-jpql-named-param/{name}/{description}")
+    public ResponseEntity<Product> findProductNameAndDescriptionJPQLNamedParam(@PathVariable("name")String name,@PathVariable("description") String description){
+        Product product = productService.findProductNameAndDescriptionJQLNamedParam(name,description);
+        return new ResponseEntity<Product>(product,HttpStatus.OK);
+    }
+
+    @GetMapping("/get-product-by-name-description-native-index-param/{name}/{description}")
+    public ResponseEntity<Product> findProductNameAndDescriptionNativeIndexParam(@PathVariable("name")String name,@PathVariable("description") String description){
+        Product product = productService.findProductNameAndDescriptionNativeIndexParam(name,description);
+        return new ResponseEntity<Product>(product,HttpStatus.OK);
+    }
+
+    @GetMapping("/get-product-by-name-description-native-named-param/{name}/{description}")
+    public ResponseEntity<Product> findProductNameAndDescriptionNativeNamedParam(@PathVariable("name")String name,@PathVariable("description") String description){
+        Product product = productService.findProductNameAndDescriptionNativeNamedParam(name,description);
+        return new ResponseEntity<Product>(product,HttpStatus.OK);
+    }
+
+
 
     @PostMapping("/save")
     public ResponseEntity<Product> saveProduct(@RequestBody Product product){

@@ -185,4 +185,36 @@ public class ProductService {
     public List<Product> getProductByNameIn(List<String> names) {
         return productRepository.findByNameIn(names);
     }
+
+    public List<Product> findByPrice(BigDecimal price){
+        return productRepository.findByPrice(price);
+    }
+
+    public List<Product> findByImageUrl(String imageUrl){
+        return productRepository.findByImageUrl(imageUrl);
+    }
+
+    public Product findBySku(String sku){
+        return productRepository.findBySku(sku);
+    }
+
+    public List<Product> findBySkuOrDescription(String sku,String description){
+        return productRepository.findBySkuOrDescription(sku,description);
+    }
+
+    public Product findProductNameAndDescriptionJQLIndexParam(String name,String description){
+        return productRepository.findProductNameAndDescriptionJQLIndexParam(name,description);
+    }
+
+    public Product findProductNameAndDescriptionJQLNamedParam(String name, String description) {
+        return productRepository.findProductNameAndDescriptionJQLNamedParam(name,description);
+    }
+
+    public Product findProductNameAndDescriptionNativeIndexParam(String name, String description) {
+        return productRepository.findProductNameAndDescriptionNativeIndexParam(name,description);
+    }
+
+    public Product findProductNameAndDescriptionNativeNamedParam(String name, String description) {
+        return productRepository.findProductNameAndDescriptionNativeNamedParam(name,description);
+    }
 }

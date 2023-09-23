@@ -7,14 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -32,11 +25,38 @@ import org.hibernate.annotations.UpdateTimestamp;
                         columnNames = "stock_keeping_unit")
         }
 )
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name="Product.findByPrice",
+                        query = "SELECT p FROM Product p WHERE p.price=?1"
+                ),
+                @NamedQuery(
+                        name="Product.findByImageUrl",
+                        query="SELECT p FROM Product p WHERE p.imageUrl=:imageUrl"
+                )
+        }
+)
+@NamedNativeQueries(
+        {
+                @NamedNativeQuery(
+                        name="Product.findBySku",
+                        query="SELECT * FROM product p WHERE p.stock_keeping_unit=:sku",
+                        resultClass = Product.class
+                ),
+                @NamedNativeQuery(
+                        name="Product.findBySkuOrDescription",
+                        query="SELECT * FROM product p WHERE p.stock_keeping_unit=:sku OR p.description=:description",
+                        resultClass = Product.class
+                )
+        }
+)
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Product {
 
     @Id

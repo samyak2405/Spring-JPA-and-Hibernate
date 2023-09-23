@@ -1,7 +1,11 @@
 package com.samyak.repository;
 
+import com.samyak.constants.SQLConstants;
 import com.samyak.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.relational.core.sql.SQL;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -74,4 +78,33 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     List<Product> findByPriceBetween(BigDecimal startPrice, BigDecimal endPrice);
 
     List<Product> findByNameIn(List<String> names);
+
+    //Named JPQL Queries
+    List<Product> findByPrice(BigDecimal price);
+
+    List<Product> findByImageUrl(String imageUrl);
+
+    //JPQL Queries
+    @Query(SQLConstants.SELECT_PRODUCT_NAME_AND_DESCRIPTION_INDEX)
+    public Product findProductNameAndDescriptionJQLIndexParam(@Param("name") String name,@Param("description")String description);
+
+    @Query(SQLConstants.SELECT_PRODUCT_NAME_AND_DESCRIPTION_NAMED)
+    Product findProductNameAndDescriptionJQLNamedParam(String name, String description);
+
+    //Native Queries
+    @Query(value = SQLConstants.SELECT_PRODUCT_NAME_AND_DESCRIPTION_NATIVE_INDEX,nativeQuery = true)
+    Product findProductNameAndDescriptionNativeIndexParam(String name, String description);
+
+    @Query(value=SQLConstants.SELECT_PRODUCT_NAME_AND_DESCRIPTION_NATIVE_NAMED,nativeQuery = true)
+    Product findProductNameAndDescriptionNativeNamedParam(String name, String description);
+
+    //Named Native Queries
+    @Query(nativeQuery=true)
+    Product findBySku(String sku);
+
+    @Query(nativeQuery = true)
+    List<Product> findBySkuOrDescription(String sku,String description);
+
+
+
 }
