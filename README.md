@@ -119,5 +119,15 @@ Eg: public List<Product> findByNameAndDescription(String name,String description
 	</dependencies>
 ```
 
+## Annotations on Main method
+```
+@EnableJpaRepositories("com.samyak.repository")
+@EntityScan("com.samyak.entity")
+@ComponentScan("com.samyak.*")
+@AutoConfiguration
+@Configuration
+@EnableWebMvc
+@SpringBootApplication
+```
 
         
