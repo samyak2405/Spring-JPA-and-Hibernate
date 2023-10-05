@@ -13,6 +13,27 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format-sql=true
 spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 ```
+In application.yml file add following code
+```
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/{Database_name}?useSSL=false
+    username: {mysql_username}
+    password: {mysql_password}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+```
+
 In spring.jpa.hibernate.auto-ddl we can give following options
   1. none: disables the hbm2ddl.auto tool, so Hibernate is not going to take any action for managing the underlying database schema
   2. create-only: tells hibernate to generate the database schema from the entity model
